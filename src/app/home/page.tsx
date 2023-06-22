@@ -4,20 +4,27 @@ import { useRouter } from "next/navigation";
 import { Dialog, Transition } from '@headlessui/react'
 import Button from "../components/button/Button";
 import List from "../components/list/List";
-import { Fragment, useState } from "react";
+import { FormEvent, Fragment, useState } from "react";
+import { Ticket } from "../models/Ticket";
 
 function HomeComponent(){
-    let [isOpen, setIsOpen] = useState(false);
+    const router = useRouter();
+
+    let [isOpen, setIsOpen] = useState(true);
 
     function closeModal() {
         setIsOpen(false)
       }
     
-      function openModal() {
+    function openModal() {
         setIsOpen(true)
-      }
+    }
 
-    const router = useRouter();
+    function clearModal() {
+        
+    }
+
+
 
     const handleBack = (e: any) => {
         e.preventDefault();
@@ -29,7 +36,19 @@ function HomeComponent(){
         'Lista de espera' 
     ]
 
-    const listOptions = options.map((element)=> <Button text={element}></Button>)
+    let [matricula, setMatricula] = useState('');
+    let [nome, setNome] = useState('');
+    let [ticket, setTicket] = useState('');
+
+    let listOrder: Ticket[] = []
+
+    const handleCadastrar = (e: any) => {
+        e.preventDefault();
+        let ticket: Ticket = {chegada: new Date()}
+        console.log(ticket);
+    }
+
+    const listOptions = options.map((element,index)=> <Button key={index} text={element}></Button>)
 
     return (
         <>
@@ -85,24 +104,63 @@ function HomeComponent(){
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
 >
-                    Payment successful
+                    Cadastrar Ticket
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
-                  </div>
+                    <form action="" onSubmit={handleCadastrar}>
 
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Got it, thanks!
-                    </button>
-                  </div>
+                        <div className="flex flex-col mt-2">
+                            <label htmlFor="matricula">Matricula</label>
+                            <input 
+                                onChange={(e)=> setMatricula((e.target.value))}
+                                className="border" 
+                                name="matricula" 
+                                id="matricula" 
+                                type="text" 
+                                autoComplete="off" 
+                                required/>
+                            <label htmlFor="matricula">Nome</label>
+                            <input 
+                                onChange={(e)=> setNome((e.target.value))}
+                                className="border" 
+                                name="nome" 
+                                type="text" 
+                                id="nome"  
+                                autoComplete="off" 
+                                required/>
+                            <label htmlFor="matricula">Ticket</label>
+                            <input 
+                                onChange={(e)=> setTicket((e.target.value))}
+                                className="border" 
+                                name="ticket" 
+                                type="text" 
+                                id="ticket"  
+                                autoComplete="off" 
+                                required/>
+                        </div>
+
+                        <div className="flex space-x-14 mt-4 justify-center">
+                            <button
+                                type="submit"
+                                className="flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                                >
+                                Cadastrar
+                            </button>
+                            <button
+                                type="button"
+                                className="flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+                                onClick={closeModal}
+                                >
+                                Limpar
+                            </button>
+                            <button
+                                type="button"
+                                className="flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                                onClick={closeModal}
+                                >
+                                Fechar
+                            </button>
+                        </div>
+                    </form>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
