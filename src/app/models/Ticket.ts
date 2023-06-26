@@ -1,6 +1,6 @@
 export interface Ticket{
     chegada?: Date;
-    matricula?: number;
+    matricula?: string;
     nome?: string;
     ticket?: string;
     saida?: Date

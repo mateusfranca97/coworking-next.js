@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { User } from "../models/User";
 import { useRouter } from "next/navigation";
 
-export function LoginComponent(){
+export default function page(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter()
@@ -29,8 +29,7 @@ export function LoginComponent(){
                 <form className="flex flex-col w-96 h-96" onSubmit={handleSubmit}>
                     <label htmlFor="username">Username</label>
                     <input 
-                        className="border rounded-md h-10 pl-3"
-                        placeholder=""
+                        className="border rounded-md h-10 pl-3" 
                         type="text" 
                         name="username"
                         id="username" 
@@ -51,5 +50,3 @@ export function LoginComponent(){
         </>
     )
 }
-
-export default LoginComponent
