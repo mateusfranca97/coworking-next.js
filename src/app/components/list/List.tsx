@@ -1,10 +1,60 @@
 import { statusOrder } from "@/app/enum/statusOrder";
 import StatusTicket from "../StatusTicket/StatusTicket";
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { Ticket } from "@/app/models/Ticket";
+import { Popover, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+
+const solutions = [
+    {
+      name: 'Insights',
+      description: 'Measure actions your users take',
+      href: '##'
+    },
+    {
+      name: 'Automations',
+      description: 'Create your own targeted content',
+      href: '##'
+    },
+    {
+      name: 'Reports',
+      description: 'Keep track of your growth',
+      href: '##'
+    },
+  ]
+
+
+export const listTicket:Ticket[] = [
+    { 
+        chegada: new Date(),
+        matricula: '331276',
+        nome: 'Mateus Gomes de França',
+        ticket: 'TKT-00651234',
+        saida: new Date(),
+        status: statusOrder.COMPLETED
+    },
+    { 
+        chegada: new Date(),
+        matricula: '331502',
+        nome: 'Maria Vitoria Antonino de França',
+        ticket: 'TKT-00651235',
+        saida: new Date(),
+        status: statusOrder.PENDING
+    },
+    { 
+        chegada: new Date(),
+        matricula: '331853',
+        nome: 'Joao Victor Gomes de França',
+        ticket: 'TKT-00651236',
+        saida: new Date(),
+        status: statusOrder.SCHEDULED
+    }
+]
 
 function List(){
     return(
         <div className="w-[83vw]">
-            <div className="flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+            <div className="flex font-sans overflow-hidden">
                 <div className="w-full m-5">
                     <div className="bg-white shadow-md rounded my-6">
                         <table className="w-full table-auto">
@@ -20,26 +70,25 @@ function List(){
                             </tr>
                             </thead>
                             <tbody className="text-gray-600 text-sm font-light">
+                                {listTicket.map((ticket, index) => (
                                 <tr className="border-b border-gray-200 bg-gray-50 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">
-                                        <div className="flex items-center">
-                                        <p className="text-xs">19/06/2023 | 10:52</p>
-                                        </div>
+                                        <p className="text-xs">{ticket.chegada?.toLocaleDateString()}</p>
                                     </td>
                                     <td className="py-3 px-6 text-center">
-                                        <p className="text-xs">331276</p>
+                                        <p className="text-xs">{ticket.matricula}</p>
                                     </td>
                                     <td className="py-3 px-6 text-center">
-                                        <p className="text-xs">Mateus Gomes de França</p>
+                                        <p className="text-xs">{ticket.nome}</p>
                                     </td>
                                     <td className="py-3 px-6 text-center">
-                                        <span className="text-xs">TKT-00641234</span>
+                                        <span className="text-xs">{ticket.ticket}</span>
                                     </td>
                                     <td className="py-3 px-6 text-center">
-                                        <span className="text-xs">19/06/2023 | 12:35</span>
+                                        <span className="text-xs">{ticket.saida?.toLocaleDateString()}</span>
                                     </td>
                                     <td className="py-3 px-6 text-center">
-                                        <StatusTicket status={statusOrder.PENDING}></StatusTicket>
+                                        <StatusTicket key={index} status={ticket.status}></StatusTicket>
                                     </td>
                                     <td className="py-3 px-6 text-center">
                                         <div className="flex item-center justify-center">
@@ -62,6 +111,7 @@ function List(){
                                         </div>
                                     </td>
                                 </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>

@@ -3,8 +3,10 @@
 import { useRouter } from "next/navigation";
 import {  useState } from "react";
 import Button from "../components/button/Button";
-import List from "../components/list/List";
+import List, { listTicket } from "../components/list/List";
 import Modal from "../components/modal/Modal";
+import Count from "../components/count/Count";
+import { statusOrder } from "../enum/statusOrder";
 
 function HomeComponent(){
     const router = useRouter();
@@ -43,16 +45,18 @@ function HomeComponent(){
                 </footer>
             </aside>
             <main>
-            <div className="flex items-center justify-center">
-                <button
-                type="button"
-                className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-                onClick={openModal}
-                >
-                Cadastrar um Ticket
-                </button>
+            <div className="flex items-center justify-start">
+                <header className="flex py-10 ml-10 space-x-5">
+                    <Count amount={listTicket.length} text={'Total'}/>
+                    <Count amount={listTicket.filter(ticket => ticket.status === statusOrder.PENDING).length} text={'Pendentes'}/>
+                    <Count amount={listTicket.filter(ticket => ticket.status === statusOrder.SCHEDULED).length} text={'Aguardando'}/>
+                    <Count amount={listTicket.filter(ticket => ticket.status === statusOrder.COMPLETED).length} text={'Concluidos'}/>
+                </header>
+                <div className="flex justify-center w-full">
+                    <Button text={'Cadastrar Chamado'} onClick={openModal}/>
+                </div>
             </div>
-            <Modal isOpen={isOpen}></Modal>
+            <Modal isOpen={isOpen} setIsOpen={setIsOpen}></Modal>
             <List></List>
             </main>
         </div>

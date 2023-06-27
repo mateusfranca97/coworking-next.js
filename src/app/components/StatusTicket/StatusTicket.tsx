@@ -1,7 +1,7 @@
 import { statusOrder } from "@/app/enum/statusOrder";
 
 interface StatusTicket{
-    status: statusOrder;
+    status?: statusOrder;
 }
 
 function StatusTicket(props: StatusTicket) {
