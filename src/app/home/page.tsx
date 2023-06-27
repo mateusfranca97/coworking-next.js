@@ -8,9 +8,8 @@ import Modal from "../components/modal/Modal";
 
 function HomeComponent(){
     const router = useRouter();
-    const modal = Modal
     
-    let [isOpen, setIsOpen] = useState(true);
+    let [isOpen, setIsOpen] = useState(false);
 
     function openModal() {
         setIsOpen(true)
@@ -48,11 +47,12 @@ function HomeComponent(){
                 <button
                 type="button"
                 className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                onClick={openModal}
                 >
                 Cadastrar um Ticket
                 </button>
             </div>
-            <Modal></Modal>
+            <Modal isOpen={isOpen}></Modal>
             <List></List>
             </main>
         </div>

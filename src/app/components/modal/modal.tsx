@@ -5,44 +5,53 @@ import { Fragment, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-function Modal(){
+interface ModalProps {
+  isOpen: boolean;
+}
 
-    let [isOpen, setIsOpen] = useState(true);
+function Modal(props: ModalProps) {
+  const [isOpen, setIsOpen] = useState(true);
 
-    function closeModal() {
-        setIsOpen(false)
-      }
+  const closeModal = () => {
+    setIsOpen(false)
+    console.log(isOpen)
+  }
 
-      const ticketList: Ticket[] = []
+  const ticketList: Ticket[] = [];
 
-      function createTicket(data: Ticket){
-        data.chegada = new Date();
-        ticketList.push(data)
-        closeModal()
-        console.log(ticketList)
-      }
+  function createTicket(data: Ticket) {
+    data.chegada = new Date();
+    ticketList.push(data);
+    closeModal();
+    console.log(ticketList);
+  }
 
-      const createTicketFormSchema = z.object({
-        matricula: z.string()
-        .nonempty("A matricula é obrigatória")
-        .min(6, "Quantidade de caracteres inferior a 6.")
-        .max(6, 'Quantidade de caracteres superior a 6.'),
-        nome: z.string().nonempty("Nome é obrigatoria")
-        .nonempty("O nome é obrigatorio."),
-        ticket: z.string()
-        .max(12, "Número do chamado superior ao padrão.")
-        .min(12, "Número do chamado inferior ao padrão."),
-      })
+  const createTicketFormSchema = z.object({
+    matricula: z
+      .string()
+      .nonempty("A matricula é obrigatória")
+      .min(6, "Quantidade de caracteres inferior a 6.")
+      .max(6, "Quantidade de caracteres superior a 6."),
+    nome: z.string().nonempty("Nome é obrigatório"),
+    ticket: z
+      .string()
+      .max(12, "Número do chamado superior ao padrão.")
+      .min(12, "Número do chamado inferior ao padrão."),
+  });
 
-      type CreateTicketFormData = z.infer<typeof createTicketFormSchema>
+  type CreateTicketFormData = z.infer<typeof createTicketFormSchema>;
 
-      const { register, handleSubmit, formState:{ errors } } = useForm<CreateTicketFormData>({
-          resolver: zodResolver(createTicketFormSchema),
-      })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateTicketFormData>({
+    resolver: zodResolver(createTicketFormSchema),
+  });
 
     return(
         <>
-        <Transition appear show={isOpen} as={Fragment}>
+        <Transition appear show={props.isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>
                     <Transition.Child
                         as={Fragment}
