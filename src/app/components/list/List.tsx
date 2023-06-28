@@ -71,24 +71,24 @@ function List(){
                             </thead>
                             <tbody className="text-gray-600 text-sm font-light">
                                 {listTicket.map((ticket, index) => (
-                                <tr className="border-b border-gray-200 bg-gray-50 hover:bg-gray-100">
+                                <tr className="border-b border-gray-200 bg-gray-50 hover:bg-gray-100" key={index}>
                                     <td className="py-3 px-6 text-left">
-                                        <p className="text-xs">{ticket.chegada?.toLocaleDateString()}</p>
+                                        <p className="text-xs" >{ticket.chegada?.toLocaleDateString()}</p>
                                     </td>
                                     <td className="py-3 px-6 text-center">
                                         <p className="text-xs">{ticket.matricula}</p>
                                     </td>
                                     <td className="py-3 px-6 text-center">
-                                        <p className="text-xs">{ticket.nome}</p>
+                                        <p className="text-xs" >{ticket.nome}</p>
                                     </td>
                                     <td className="py-3 px-6 text-center">
-                                        <span className="text-xs">{ticket.ticket}</span>
+                                        <span className="text-xs" >{ticket.ticket}</span>
                                     </td>
                                     <td className="py-3 px-6 text-center">
-                                        <span className="text-xs">{ticket.saida?.toLocaleDateString()}</span>
+                                        <span className="text-xs" >{ticket.saida?.toLocaleDateString()}</span>
                                     </td>
                                     <td className="py-3 px-6 text-center">
-                                        <StatusTicket key={index} status={ticket.status}></StatusTicket>
+                                        <StatusTicket status={ticket.status}></StatusTicket>
                                     </td>
                                     <td className="py-3 px-6 text-center">
                                         <div className="flex item-center justify-center">
