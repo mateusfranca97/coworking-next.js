@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import {  useState } from "react";
 import Button from "../components/button/Button";
 import List, { listTicket } from "../components/list/List";
-import Modal from "../components/modal/Modal";
 import Count from "../components/count/Count";
 import { statusOrder } from "../enum/statusOrder";
+import Modal from "../components/modal/Modal";
 
 function HomeComponent(){
     const router = useRouter();
@@ -33,7 +33,7 @@ function HomeComponent(){
         <>
         <div className="flex flex-row">
 
-            <aside className="flex flex-col w-60 h-screen bg-slate-100">
+            <aside className="flex flex-col w-64 h-screen bg-slate-100">
                 <header className="basis-1/5 flex items-center justify-center">
                 <h1 className="text-2xl font-semibold"><span className="text-green-600">co</span>Working</h1>
                 </header>

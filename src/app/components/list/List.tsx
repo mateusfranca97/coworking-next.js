@@ -1,9 +1,6 @@
 import { statusOrder } from "@/app/enum/statusOrder";
-import StatusTicket from "../StatusTicket/StatusTicket";
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import StatusTicket from "../statusTicket/StatusTicket";
 import { Ticket } from "@/app/models/Ticket";
-import { Popover, Transition } from "@headlessui/react";
-import { Fragment } from "react";
 
 const solutions = [
     {

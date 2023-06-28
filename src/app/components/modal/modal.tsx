@@ -2,7 +2,7 @@ import { Ticket } from "@/app/models/Ticket";
 import { listTicket } from "../list/List";
 import { Dialog, Transition } from "@headlessui/react"
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { Fragment } from "react"
+import React, { Fragment, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { statusOrder } from "@/app/enum/statusOrder";
@@ -28,9 +28,10 @@ function Modal(props: ModalProps) {
       status: statusOrder.PENDING,
       saida: new Date(),
     }
-
+    
     listTicket.push(user);
-    console.log(listTicket);
+    console.log(data.matricula)
+
     closeModal();
   }
 
