@@ -6,7 +6,8 @@ import Button from "../components/button/Button";
 import List, { listTicket } from "../components/list/List";
 import Count from "../components/count/Count";
 import { statusOrder } from "../enum/statusOrder";
-import Modal from "../components/modal/Modal";
+import Modal from "../components/modal/modal";
+
 
 function HomeComponent(){
     const router = useRouter();
@@ -24,7 +25,8 @@ function HomeComponent(){
 
     const options = [
         'Inicio',
-        'Lista de espera' 
+        'Lista de espera',
+        'Resumo'
     ]
 
     const listOptions = options.map((element,index)=> <Button key={index} text={element}></Button>)
