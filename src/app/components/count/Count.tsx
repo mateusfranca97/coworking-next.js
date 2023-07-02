@@ -37,7 +37,7 @@ function Count(props: countProps) {
         break
     }
     setCount(filteredCount)
-  }, [props.amount])
+  }, [props.amount, props.text])
 
   return (
     <div className="w-40 h-20 bg-slate-600 rounded text-white p-3 space-y-2">

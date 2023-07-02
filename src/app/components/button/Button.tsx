@@ -1,5 +1,6 @@
 interface ButtonProps {
   text: string
+
   // eslint-disable-next-line no-undef
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
