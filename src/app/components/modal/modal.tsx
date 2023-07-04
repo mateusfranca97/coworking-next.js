@@ -1,11 +1,11 @@
+import { StatusOrder } from '@/app/enum/statusOrder'
+import { initialListTicket } from '@/app/home/page'
 import { Ticket } from '@/app/models/Ticket'
-import { listTicket } from '../list/List'
 import { Dialog, Transition } from '@headlessui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React, { Fragment } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { statusOrder } from '@/app/enum/statusOrder'
 
 interface ModalProps {
   isOpen: boolean
@@ -25,11 +25,11 @@ function Modal(props: ModalProps) {
       matricula: data.matricula?.toLocaleUpperCase(),
       nome: data.nome?.toLocaleUpperCase(),
       ticket: data.ticket?.toLocaleUpperCase(),
-      status: statusOrder.PENDING,
+      status: StatusOrder.PENDING,
       saida: new Date(),
     }
 
-    listTicket.push(user)
+    initialListTicket.push(user)
     clearModal()
     closeModal()
   }

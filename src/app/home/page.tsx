@@ -40,7 +40,9 @@ export const initialListTicket: Ticket[] = [
 const options = ['Inicio', 'Lista de espera', 'Resumo'] as const
 
 function HomeComponent() {
-  // se vc precisa que sua lista seja usada em vários lugares, vc pode colocar ela no componente pai e passar ela como props para os componentes filhos, ou vc pode usar o context api, nesse caso usei a primeira estratégia
+  // se vc precisa que sua lista seja usada em vários lugares, vc pode colocar ela no componente pai
+  // e passar ela como props para os componentes filhos, ou vc pode usar o context api, nesse caso usei
+  // a primeira estratégia
   const [listTicket, setListTicket] = useState<Ticket[]>(initialListTicket)
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
