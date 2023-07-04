@@ -1,48 +1,12 @@
 import { Ticket } from '@/app/models/Ticket'
 import StatusTicket from '../StatusTicket/StatusTicket'
-import { useState } from 'react'
 
-export const listTicket: Ticket[] = [
-  /*
-    { 
-        chegada: new Date(),
-        matricula: '331276',
-        nome: 'Mateus Gomes de França',
-        ticket: 'TKT-00651234',
-        saida: new Date(),
-        status: statusOrder.COMPLETED
-    },
-    { 
-        chegada: new Date(),
-        matricula: '331502',
-        nome: 'Maria Vitoria Antonino de França',
-        ticket: 'TKT-00651235',
-        saida: new Date(),
-        status: statusOrder.PENDING
-    },
-    { 
-        chegada: new Date(),
-        matricula: '331853',
-        nome: 'Joao Victor Gomes de França',
-        ticket: 'TKT-00651236',
-        saida: new Date(),
-        status: statusOrder.SCHEDULED
-    }
-    */
-]
+type ListProps = {
+  listTicket: Ticket[]
+  onDeleteTicket: (index: number) => void
+}
 
-function List() {
-  const [, setDeleteItem] = useState<Ticket[]>([])
-
-  const deleteData = (index: number) => {
-    const data = listTicket.indexOf(listTicket[index])
-
-    if (data > -1) {
-      setDeleteItem(listTicket.splice(data, 1))
-    }
-    console.log(listTicket)
-  }
-
+function List({ listTicket, onDeleteTicket }: ListProps) {
   return (
     <div className="w-[83vw]">
       <div className="flex font-sans overflow-hidden">
@@ -128,7 +92,7 @@ function List() {
                         </div>
                         <div
                           className="w-4 mr-2 transform hover:text-green-500 hover:scale-110"
-                          onClick={() => deleteData(index)}
+                          onClick={() => onDeleteTicket(index)}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
