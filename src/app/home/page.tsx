@@ -2,12 +2,13 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { StatusOrder } from '../enum/statusOrder'
 import Button from '../components/button/Button'
 import List from '../components/list/List'
 import Count from '../components/count/Count'
-import { StatusOrder } from '../enum/statusOrder'
 import Modal from '../components/modal/modal'
 import { Ticket } from '@/app/models/Ticket'
+
 
 export const initialListTicket: Ticket[] = [
   {
@@ -40,6 +41,7 @@ export const initialListTicket: Ticket[] = [
 const options = ['Inicio', 'Lista de espera', 'Resumo'] as const
 
 function HomeComponent() {
+
   // se vc precisa que sua lista seja usada em vários lugares, vc pode colocar ela no componente pai
   // e passar ela como props para os componentes filhos, ou vc pode usar o context api, nesse caso usei
   // a primeira estratégia
@@ -53,6 +55,10 @@ function HomeComponent() {
 
   const getCount = (status: StatusOrder) => {
     return listTicket.filter((ticket) => ticket.status === status).length
+  }
+
+  const getTotal = () => {
+    return listTicket.length
   }
 
   const onDeleteTicket = (index: number) => {
@@ -82,7 +88,7 @@ function HomeComponent() {
             <header className="flex py-10 ml-10 space-x-5">
               <Count
                 text={StatusOrder.TOTAL}
-                count={getCount(StatusOrder.TOTAL)}
+                count={getTotal()}
               />
               <Count
                 text={StatusOrder.PENDING}
