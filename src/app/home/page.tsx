@@ -9,8 +9,7 @@ import Count from '../components/count/Count'
 import Modal from '../components/modal/modal'
 import { Ticket } from '@/app/models/Ticket'
 
-
-export const initialListTicket: Ticket[] = [
+export let initialListTicket: Ticket[] = [
   {
     chegada: new Date(),
     matricula: '331276',
@@ -108,7 +107,7 @@ function HomeComponent() {
             </div>
           </div>
           <Modal isOpen={isOpen} setIsOpen={setIsOpen}></Modal>
-          <List listTicket={listTicket} onDeleteTicket={onDeleteTicket} />
+          <List listTicket={listTicket} onDeleteTicket={onDeleteTicket}/>
         </main>
       </div>
     </>

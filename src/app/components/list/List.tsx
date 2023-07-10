@@ -1,12 +1,18 @@
 import { Ticket } from '@/app/models/Ticket'
 import StatusTicket from '../StatusTicket/StatusTicket'
+import { useRouter } from 'next/navigation'
 
 type ListProps = {
   listTicket: Ticket[]
   onDeleteTicket: (index: number) => void
 }
 
-function List({ listTicket, onDeleteTicket }: ListProps) {
+function List({ listTicket, onDeleteTicket  }: ListProps) {
+
+  const router = useRouter()
+
+  const onEditTicket = () => router.push('/home/edit')
+
   return (
     <div className="w-[83vw]">
       <div className="flex font-sans overflow-hidden">
@@ -76,7 +82,8 @@ function List({ listTicket, onDeleteTicket }: ListProps) {
                             />
                           </svg>
                         </div>
-                        <div className="w-4 mr-2 transform hover:text-green-500 hover:scale-110">
+                        <div className="w-4 mr-2 transform hover:text-green-500 hover:scale-110"
+                        onClick={onEditTicket}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

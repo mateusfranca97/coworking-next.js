@@ -17,10 +17,8 @@ function Modal(props: ModalProps) {
     props.setIsOpen(false)
   }
 
-  const clearModal = () => {}
-
   function createTicket(data: Ticket) {
-    const user: Ticket = {
+    let user: Ticket = {
       chegada: new Date(),
       matricula: data.matricula?.toLocaleUpperCase(),
       nome: data.nome?.toLocaleUpperCase(),
@@ -30,7 +28,6 @@ function Modal(props: ModalProps) {
     }
 
     initialListTicket.push(user)
-    clearModal()
     closeModal()
   }
 
