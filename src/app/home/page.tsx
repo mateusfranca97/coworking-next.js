@@ -37,7 +37,7 @@ export let initialListTicket: Ticket[] = [
 ]
 
 // se for uma constante e não for mudar pode colocar fora do componente
-const options = ['Inicio', 'Lista de espera', 'Resumo'] as const
+const options = ['Inicio', 'Calendario'] as const
 
 function HomeComponent() {
 

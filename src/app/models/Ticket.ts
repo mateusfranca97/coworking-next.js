@@ -1,10 +1,11 @@
-import { statusOrder } from '../enum/statusOrder'
+import { StatusOrder } from '../enum/statusOrder'
 
 export interface Ticket {
   chegada?: Date
   matricula?: string
   nome?: string
   ticket?: string
-  status?: statusOrder
+  status?: StatusOrder
   saida?: Date
+  tratativa?: string
 }

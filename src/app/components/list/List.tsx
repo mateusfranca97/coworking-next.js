@@ -1,6 +1,6 @@
 import { Ticket } from '@/app/models/Ticket'
 import StatusTicket from '../StatusTicket/StatusTicket'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 type ListProps = {
   listTicket: Ticket[]
@@ -10,8 +10,12 @@ type ListProps = {
 function List({ listTicket, onDeleteTicket  }: ListProps) {
 
   const router = useRouter()
-
-  const onEditTicket = () => router.push('/home/edit')
+  const searchParams = useSearchParams()
+  const search = searchParams.get('search')
+  
+  const onEditTicket = (ticket: number) => (
+    router.push('/home/edit')
+    )
 
   return (
     <div className="w-[83vw]">
@@ -83,7 +87,7 @@ function List({ listTicket, onDeleteTicket  }: ListProps) {
                           </svg>
                         </div>
                         <div className="w-4 mr-2 transform hover:text-green-500 hover:scale-110"
-                        onClick={onEditTicket}>
+                        onClick={() => onEditTicket(index)}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

@@ -5,8 +5,19 @@ import { z } from 'zod'
 import { useForm } from "react-hook-form"
 import StatusTicket from "@/app/components/StatusTicket/StatusTicket"
 import { StatusOrder } from "@/app/enum/statusOrder"
+import { useRouter } from "next/navigation"
+import { initialListTicket } from "../page"
+import { useState } from "react"
+import { Ticket } from "@/app/models/Ticket"
 
 function EditTicket(){
+    const router = useRouter()
+
+    const [listTicket, setListTicket] = useState<Ticket[]>(initialListTicket)
+
+    const onUpdateTicket = (index: number) => {
+        {console.log(index)}
+    }
 
     const createTicketFormSchema = z.object({
         chegada: z.date(),
@@ -24,17 +35,16 @@ function EditTicket(){
     
       const {
         register,
-        handleSubmit,
-        formState: { errors },
       } = useForm<CreateTicketFormData>({
         resolver: zodResolver(createTicketFormSchema),
       })
 
     return(
+
         <div>
             <header className="h-16 w-screen flex items-center justify-between px-10 border-b-[1px] border-b-green-600">
                 <h1 className="text-2xl">Editar Ticket</h1>
-                <p className="flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2">Voltar</p>
+                <p onClick={() => router.push('/home')} className="flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2">Voltar</p>
             </header>
             <main className="m-5 h-full flex justify-center">
                 <form action="" className="flex flex-col">
@@ -45,38 +55,40 @@ function EditTicket(){
                         id="matricula"
                         type="text"
                         autoComplete="off"
-                        maxLength={6}
                       />
                     <label htmlFor="chegada">Matricula</label>
                     <input
-                        className="border mt-1 h-8 rounded-md focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                        className="border mt-1 pl-2 h-8 rounded-md focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                         {...register('matricula')}
                         id="matricula"
                         type="text"
                         autoComplete="off"
                         maxLength={6}
+                        value={listTicket[0].matricula}
                       />
                     <label htmlFor="chegada">Nome</label>
                     <input
-                        className="border mt-1 h-8 rounded-md focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                        className="border mt-1 pl-2  h-8 rounded-md focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                         {...register('nome')}
                         id="matricula"
                         type="text"
                         autoComplete="off"
                         maxLength={6}
+                        value={listTicket[0].nome}
                       />
                     <label htmlFor="chegada">Ticket</label>
                     <input
-                        className="border mt-1 h-8 rounded-md focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                        className="border mt-1 pl-2  h-8 rounded-md focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                         {...register('ticket')}
                         id="matricula"
                         type="text"
                         autoComplete="off"
                         maxLength={6}
+                        value={listTicket[0].ticket}
                       />
                     <label htmlFor="chegada">Saida</label>
                     <input
-                        className="border mt-1 h-8 rounded-md focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                        className="border mt-1 pl-2  h-8 rounded-md focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                         {...register('saida')}
                         id="matricula"
                         type="text"
@@ -91,7 +103,7 @@ function EditTicket(){
                     </div>
                     <label htmlFor="chegada">Tratativa</label>
                     <input
-                        className="border mt-1 h-8 rounded-md focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                        className="border mt-1 pl-2 h-8 rounded-md focus:outline-none focus-visible:ring-1 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                         {...register('tratativa')}
                         id="tratativa"
                         type="text"
@@ -99,8 +111,9 @@ function EditTicket(){
                       />
                     <div className="flex m-5 justify-center">
                         <button
-                            type="submit"
+                            type="button"
                             className="flex w-full justify-center rounded-md border border-transparent bg-green-100 px-4 py-3 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                            onClick={() => console.log(listTicket[0])}
                         >
                             Atualizar
                         </button>
