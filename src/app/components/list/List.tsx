@@ -1,6 +1,6 @@
 import { Ticket } from '@/app/models/Ticket'
 import StatusTicket from '../StatusTicket/StatusTicket'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 type ListProps = {
   listTicket: Ticket[]
@@ -10,12 +10,11 @@ type ListProps = {
 function List({ listTicket, onDeleteTicket  }: ListProps) {
 
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const search = searchParams.get('search')
   
   const onEditTicket = (ticket: number) => (
-    router.push('/home/edit')
-    )
+    router.push(`/home/ticket/${ticket}`)
+  )
+
 
   return (
     <div className="w-[83vw]">
@@ -28,6 +27,7 @@ function List({ listTicket, onDeleteTicket  }: ListProps) {
                   <th className="py-3 px-6 text-center">Chegada</th>
                   <th className="py-3 px-6 text-center">Matricula</th>
                   <th className="py-3 px-6 text-center">Nome</th>
+                  <th className="py-3 px-6 text-center">Operação</th>
                   <th className="py-3 px-6 text-center">Ticket</th>
                   <th className="py-3 px-6 text-center">Saida</th>
                   <th className="py-3 px-6 text-center">Status</th>
@@ -50,6 +50,9 @@ function List({ listTicket, onDeleteTicket  }: ListProps) {
                     </td>
                     <td className="py-3 px-6 text-center">
                       <p className="text-xs">{ticket.nome}</p>
+                    </td>
+                    <td className="py-3 px-6 text-center">
+                      <p className="text-xs">{ticket.operacao}</p>
                     </td>
                     <td className="py-3 px-6 text-center">
                       <span className="text-xs">{ticket.ticket}</span>

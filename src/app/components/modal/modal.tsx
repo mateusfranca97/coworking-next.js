@@ -22,6 +22,7 @@ function Modal(props: ModalProps) {
       chegada: new Date(),
       matricula: data.matricula?.toLocaleUpperCase(),
       nome: data.nome?.toLocaleUpperCase(),
+      operacao: data.operacao?.toLocaleUpperCase(),
       ticket: data.ticket?.toLocaleUpperCase(),
       status: StatusOrder.PENDING,
       saida: new Date(),
@@ -37,6 +38,7 @@ function Modal(props: ModalProps) {
       .nonempty('A matricula é obrigatória')
       .min(6, 'Quantidade de caracteres inferior a 6.'),
     nome: z.string().nonempty('Nome é obrigatório'),
+    operacao: z.string().nonempty('Operação é obrigatório'),
     ticket: z.string().min(12, 'Número do chamado inferior ao padrão.'),
   })
 
@@ -86,7 +88,7 @@ function Modal(props: ModalProps) {
                   </Dialog.Title>
                   <form action="" onSubmit={handleSubmit(createTicket)}>
                     <div className="flex flex-col mt-2">
-                      <label htmlFor="matricula">Matricula</label>
+                      <label htmlFor="matricula" className='font-semibold'>Matricula</label>
                       <input
                         className="border"
                         {...register('matricula')}
@@ -96,9 +98,9 @@ function Modal(props: ModalProps) {
                         maxLength={6}
                       />
                       {errors.matricula && (
-                        <span>{errors.matricula.message}</span>
+                        <span className='text-red-300'>{errors.matricula.message}</span>
                       )}
-                      <label htmlFor="matricula">Nome</label>
+                      <label htmlFor="Nome"  className='font-semibold'>Nome</label>
                       <input
                         className="border"
                         {...register('nome')}
@@ -106,8 +108,21 @@ function Modal(props: ModalProps) {
                         id="nome"
                         autoComplete="off"
                       />
-                      {errors.nome && <span>{errors.nome.message}</span>}
-                      <label htmlFor="matricula">Ticket</label>
+                      {errors.nome && (
+                        <span className='text-red-300'>{errors.nome.message}</span>
+                      )}
+                      <label htmlFor="operacao"  className='font-semibold'>Operação</label>
+                      <input
+                        className="border"
+                        {...register('operacao')}
+                        type="text"
+                        id="operacao"
+                        autoComplete="off"
+                      />
+                      {errors.operacao && (
+                        <span className='text-red-300'>{errors.operacao.message}</span>
+                      )}
+                      <label htmlFor="matricula"  className='font-semibold'>Ticket</label>
                       <input
                         className="border"
                         {...register('ticket')}
@@ -116,7 +131,7 @@ function Modal(props: ModalProps) {
                         autoComplete="off"
                         maxLength={12}
                       />
-                      {errors.ticket && <span>{errors.ticket.message}</span>}
+                      {errors.ticket && <span className='text-red-300'>{errors.ticket.message}</span>}
                     </div>
 
                     <div className="flex space-x-14 mt-4 justify-center">

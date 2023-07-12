@@ -6,18 +6,12 @@ import { useForm } from "react-hook-form"
 import StatusTicket from "@/app/components/StatusTicket/StatusTicket"
 import { StatusOrder } from "@/app/enum/statusOrder"
 import { useRouter } from "next/navigation"
-import { initialListTicket } from "../page"
 import { useState } from "react"
+import { initialListTicket } from "../../page"
 import { Ticket } from "@/app/models/Ticket"
 
-function EditTicket(){
+function EditTicket({params}: {params:{ id:number }}){
     const router = useRouter()
-
-    const [listTicket, setListTicket] = useState<Ticket[]>(initialListTicket)
-
-    const onUpdateTicket = (index: number) => {
-        {console.log(index)}
-    }
 
     const createTicketFormSchema = z.object({
         chegada: z.date(),
@@ -39,8 +33,11 @@ function EditTicket(){
         resolver: zodResolver(createTicketFormSchema),
       })
 
-    return(
+    const [listTicket, setListTicket] = useState(initialListTicket) 
 
+    return(
+      <>
+      {params.id && (
         <div>
             <header className="h-16 w-screen flex items-center justify-between px-10 border-b-[1px] border-b-green-600">
                 <h1 className="text-2xl">Editar Ticket</h1>
@@ -55,6 +52,7 @@ function EditTicket(){
                         id="matricula"
                         type="text"
                         autoComplete="off"
+                        value={listTicket[params.id].chegada}
                       />
                     <label htmlFor="chegada">Matricula</label>
                     <input
@@ -64,7 +62,7 @@ function EditTicket(){
                         type="text"
                         autoComplete="off"
                         maxLength={6}
-                        value={listTicket[0].matricula}
+                        value={listTicket[params.id].matricula}
                       />
                     <label htmlFor="chegada">Nome</label>
                     <input
@@ -74,7 +72,7 @@ function EditTicket(){
                         type="text"
                         autoComplete="off"
                         maxLength={6}
-                        value={listTicket[0].nome}
+                        value={listTicket[params.id].nome}
                       />
                     <label htmlFor="chegada">Ticket</label>
                     <input
@@ -84,7 +82,7 @@ function EditTicket(){
                         type="text"
                         autoComplete="off"
                         maxLength={6}
-                        value={listTicket[0].ticket}
+                        value={listTicket[params.id].ticket}
                       />
                     <label htmlFor="chegada">Saida</label>
                     <input
@@ -94,6 +92,7 @@ function EditTicket(){
                         type="text"
                         autoComplete="off"
                         maxLength={6}
+                        value={listTicket[params.id].saida}
                       />
                     <label htmlFor="chegada">Status</label>
                     <div className="flex m-2 space-x-5">
@@ -113,7 +112,6 @@ function EditTicket(){
                         <button
                             type="button"
                             className="flex w-full justify-center rounded-md border border-transparent bg-green-100 px-4 py-3 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
-                            onClick={() => console.log(listTicket[0])}
                         >
                             Atualizar
                         </button>
@@ -121,6 +119,8 @@ function EditTicket(){
                 </form>
             </main>
         </div>
+         )}
+      </>
     )
 }
 
